@@ -1,0 +1,12 @@
+---
+
+- name: Install redis
+  yum: 
+    name=redis state=present
+  when: 
+    ansible_os_family == "RedHat" and ansible_lsb.major_release|int >= 6
+
+- name: run chkconfig set redis on
+  command: 
+    /sbin/chkconfig redis on
+   /etc/init.d/redis start
