@@ -1,0 +1,13 @@
+---
+galaxy_info:
+    author: Robert Readman
+    description: A role that installs redis
+    license: MIT
+    min_ansible_version: 1.9
+    platforms:
+    - name: EL
+      versions:
+      - 6
+    categories:
+      - Monitoring, Data Server
+dependencies: []
