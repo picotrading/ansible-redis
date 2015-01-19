@@ -1,33 +1,5 @@
-Redis
-=======
-
-This role does an install of Redis via yum and starts the service for Redhat platforms.
-
-The init script is set to the format recommended by redis of redis_portnumber.
-
-You can configure all variables that are availabe in the redis.conf file except for those that come as commented out by default.  Always refer to the redis.conf file before changing variables, lest you cause a catastrophe to your setup.
-
-Example
--------
-
-```
-- name: Install redis
-  yum:
-    name=redis
-    state=present
-  when:
-    ansible_os_family == "RedHat"
-  vars:
-    redis_config_dir: /etc/redis/corporate_dir
-    redis_port: 1234
-    max_dbs: 8
-    client_idle_timeout: 3
-```
-
-
-Role variables
---------------
-```
+---
+# refer to redis.conf if changing values
 redis_config_dir: /etc/redis
 redis_var_dir: /var/redis
 
@@ -42,7 +14,7 @@ log_dir: /var/log/redis
 redis_log: "{{ log_dir }}/redis.log"
 max_dbs: 16
 
-#db saves: seconds and changes eg 900 seconds and 1 change
+#db saves: seconds changes eg 900 seconds after 1 change
 redis_save:
   - 900 1
   - 300 10
@@ -73,15 +45,3 @@ set_max_intset_entries: 512
 zset_max_ziplist_entries: 128
 zset_max_ziplist_value: 64
 active_rehashing: yes
-```
-
-License
--------
-
-MIT
-
-
-Author
-------
-
-Robert Readman
