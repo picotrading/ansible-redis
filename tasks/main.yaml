@@ -24,7 +24,7 @@
 - name: Copy Redis configuration file
   template:
     src: redis.conf.j2
-    dest: "{{ redis_config_dir }}/redis.conf"
+    dest: "{{ redis_config_dir }}/{{ redis_port }}.conf"
     owner: root
     group: root
     mode: 755
