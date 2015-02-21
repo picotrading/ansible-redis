@@ -3,41 +3,25 @@
 - name: Test if distribution is RedHat
   assert:
     that: ansible_os_family == "RedHat" and
-          ansible_distribution_major_version | int >= 6
+          ansible_distribution_major_version | int <= 6
 
 - name: Install Redis
-  yum: 
+  yum:
     name: redis
-    state: present 
 
-- name: Create Redis config data dirs
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: root
-    group: root
-    mode: 755
-  with_items:
-    - "{{ redis_config_dir }}"
-    - "{{ redis_var_dir }}"
-
-- name: Copy Redis configuration file
+- name: Configure Redis
   template:
     src: redis.conf.j2
-    dest: "{{ redis_config_dir }}/{{ redis_port }}.conf"
-    owner: root
-    group: root
-    mode: 755
+    dest: /etc/redis.conf
+  notify:
+    - Restart Redis
 
-- name: Copy template init script
-  template:
-    src: redis_init.j2
-    dest: "/etc/init.d/redis_{{ redis_port }}"
-    owner: root
-    group: root
-    mode: 755
+- name: Copy sysconfig file
+  copy:
+    src: redis_sysconfig
+    dest: /etc/sysconfig/redis
 
-- name: Enable and start redis
+- name: Enable and start Redis
   service:
     name: redis
     state: started
