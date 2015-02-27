@@ -123,7 +123,7 @@ redis_security_2_8: &redis_security_2_8
 
 # Limits
 redis_limits_maxclients: 10000
-redis_limits_maxmemory: 524288
+redis_limits_maxmemory: 128000000
 redis_limits_maxmemory_policy: volatile-lru
 redis_limits_maxmemory_samples: 3
 
