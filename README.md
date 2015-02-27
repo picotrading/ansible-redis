@@ -183,7 +183,7 @@ redis_security_requirepass: foobared
 redis_security_rename_command: []
 
 redis_security_2_4: &redis_security_2_4
-  requirepass: "{{ redis_security_requirepass }}"
+  #requirepass: "{{ redis_security_requirepass }}"
   rename-command: "{{ redis_security_rename_command }}"
 
 redis_security_2_6: &redis_security_2_6
