@@ -8,6 +8,10 @@
 - name: Install Redis
   yum:
     name: redis
+  notify:
+    - Restart Redis
+  tags:
+    - redis_pkg
 
 - name: Configure Redis
   template:
@@ -15,6 +19,8 @@
     dest: /etc/redis.conf
   notify:
     - Restart Redis
+  tags:
+    - redis_config
 
 - name: Copy sysconfig file
   copy:
