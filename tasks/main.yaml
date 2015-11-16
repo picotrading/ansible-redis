@@ -3,7 +3,7 @@
 - name: Test if distribution is RedHat
   assert:
     that: ansible_os_family == "RedHat" and
-          ansible_distribution_major_version | int <= 6
+          ansible_distribution_major_version | int <= 7
 
 - name: Install Redis
   yum:
